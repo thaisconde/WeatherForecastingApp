@@ -1,0 +1,12 @@
+//Error View
+"errorView.title" = "Sorry...";
+"errorView.message" = "";
+"errorView.firstOptionButton" = "Try Again";
+"errorView.secondOptionButton" = "OK";
+
+//Today
+"share" = "Share";
+
+//Forcast
+
+"name" = "It`s raining.";

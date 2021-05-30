@@ -18,13 +18,14 @@ enum Icon: String, Decodable {
     case snowDay = "13d"
     case mistDay = "50d"
     
-    var name: String {
-        switch self {
-        case .clearSkyDay:
-            return "Day"
-        default:
-            return "Noite"
-        }
-    }
-    
+//    var temperature: String {
+//        let prefix = "Forecast"
+//        var name: String
+//        switch self {
+//        case .clearSkyNight:
+//            name = ""
+//        }
+//
+//        return "\(prefix)\(name)"
+//    }
 }

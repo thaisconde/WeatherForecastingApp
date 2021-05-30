@@ -11,19 +11,17 @@ enum ViewStatus {
 protocol TodayViewModelProtocol {
     func getCurrentWeather(at place: String)
     var delegate: TodayViewModelDelegate? { get set }
-    var currentWeather: [CurrentWeatherResponse]? { get set }
+    var currentWeather: [CurrentWeatherResponse] { get set }
 }
 
 protocol TodayViewModelDelegate: AnyObject {
-//    func showError(message: String)
-   // func updateView(data: [CurrentWeatherResponse])
     func updateView(with status: ViewStatus)
 }
 
 class TodayViewModel: TodayViewModelProtocol {
     private let network: NetworkProtocol
     weak var delegate: TodayViewModelDelegate?
-    var currentWeather: [CurrentWeatherResponse]?
+    var currentWeather: [CurrentWeatherResponse] = []
     
     init(network: NetworkProtocol) {
         self.network = network
@@ -50,4 +48,13 @@ class TodayViewModel: TodayViewModelProtocol {
             }
         }
     }
+    
+//    func properties() -> [String] {
+//        for i in currentWeather {
+//            let humidity = "\(i.main.humidity ?? "")"
+//            let precipitation = "\(i.ma)"
+//            return [humidity,]
+//        }
+//        
+//    }
 }

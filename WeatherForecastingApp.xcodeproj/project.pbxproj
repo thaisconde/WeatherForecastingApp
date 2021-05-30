@@ -43,6 +43,7 @@
 		D5B4329A2662E427009F198D /* Inter-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5B432932662E427009F198D /* Inter-Medium.otf */; };
 		D5B4329B2662E427009F198D /* Inter-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = D5B432942662E427009F198D /* Inter-SemiBold.otf */; };
 		D5B4329C2662E427009F198D /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D5B432962662E427009F198D /* Localizable.strings */; };
+		D5B432BA26634267009F198D /* Double.swift in Sources */ = {isa = PBXBuildFile; fileRef = D5B432B926634267009F198D /* Double.swift */; };
 		F0F51DDDD928C66BD162A4D6 /* Pods_WeatherForecastingAppTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A317654528BD48E61762FB37 /* Pods_WeatherForecastingAppTests.framework */; };
 /* End PBXBuildFile section */
 
@@ -111,6 +112,7 @@
 		D5B432932662E427009F198D /* Inter-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-Medium.otf"; sourceTree = "<group>"; };
 		D5B432942662E427009F198D /* Inter-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Inter-SemiBold.otf"; sourceTree = "<group>"; };
 		D5B432972662E427009F198D /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D5B432B926634267009F198D /* Double.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Double.swift; sourceTree = "<group>"; };
 		DCC8CCAD7A3F3E54507F1875 /* Pods_WeatherForecastingApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_WeatherForecastingApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EF16A0120419B46CCC6F58D6 /* Pods-WeatherForecastingApp-WeatherForecastingAppUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-WeatherForecastingApp-WeatherForecastingAppUITests.debug.xcconfig"; path = "Target Support Files/Pods-WeatherForecastingApp-WeatherForecastingAppUITests/Pods-WeatherForecastingApp-WeatherForecastingAppUITests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -238,6 +240,7 @@
 		D5B432532662E415009F198D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				D5B432B926634267009F198D /* Double.swift */,
 				D5B432542662E415009F198D /* String.swift */,
 				D5B432552662E415009F198D /* Color.swift */,
 			);
@@ -611,6 +614,7 @@
 			files = (
 				D5B432882662E416009F198D /* CustomFont.swift in Sources */,
 				D5B432842662E416009F198D /* NetworkError.swift in Sources */,
+				D5B432BA26634267009F198D /* Double.swift in Sources */,
 				D5B4327C2662E416009F198D /* HomeView.swift in Sources */,
 				D5B432892662E416009F198D /* ColorStyle.swift in Sources */,
 				D5B432762662E416009F198D /* String.swift in Sources */,

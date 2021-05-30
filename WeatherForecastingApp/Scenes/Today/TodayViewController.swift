@@ -58,6 +58,11 @@ class TodayViewController: UIViewController {
         return separatorView
     }()
     
+    private lazy var collectionView: UICollectionView = {
+        let collectionView = UICollectionView()
+        return collectionView
+    }()
+    
     private lazy var temperatureView = TemperatureView()
     private lazy var propertyView = WeatherPropertyView()
     private lazy var gradientView = GradientView()
@@ -114,6 +119,19 @@ class TodayViewController: UIViewController {
         }
     }
 }
+//MARK: - COLLECTION VIEW METHODS
+
+//extension TodayViewController: UICollectionViewDataSource, UICollectionViewDelegate {
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        return 5
+//    }
+//    
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//        
+//    }
+//}
+
+
 //MARK: - DELEGATE
 extension TodayViewController: TodayViewModelDelegate {
     func updateView(with status: ViewStatus) {
@@ -130,10 +148,23 @@ extension TodayViewController: TodayViewModelDelegate {
             case let .error(error):
                 print(error)
             case .success:
+                self.updateView()
                 self.setupView()
             default:
                 break
             }
         }
     }
+    
+    func updateView() {
+        //let imagens: [String] = ["TodayHumidity-Dark", "TodayPrecipitation-Dark", "TodayPressure-Dark" ]
+        
+        propertyView.iconImageView.image = UIImage(named: "TodayHumidity-Light")
+        propertyView.valueLabel.text = String(describing: viewModel.currentWeather[0].main.humidity)
+        propertyView.nameLabel.text = String(describing:viewModel.currentWeather[0].main.temp?.fahrenheitToCelsius) + "C"
+    }
+    
+    
+    
+    
 }

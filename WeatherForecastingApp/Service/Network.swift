@@ -1,16 +1,15 @@
 import Foundation
 
-//COMO FAZER A GENERALIZAÇÃO DO MODEL??
 //existe alguma forma de deixar esse typealias privado?
 
-typealias Completion = (Result<[CurrentWeatherResponse], CustomError>)->Void
+typealias APIResponse<T> = Result<[T], CustomError>
 
 protocol NetworkProtocol {
-    func request(url: Endpoint, completion: @escaping Completion)
+    func request<T: Decodable>(url: Endpoint, completion: @escaping (APIResponse<T>) -> Void)
 }
 
 class Network: NetworkProtocol {
-    func request(url: Endpoint, completion: @escaping Completion) {
+    func request<T: Decodable>(url: Endpoint, completion: @escaping (APIResponse<T>) -> Void) {
         
         guard let url = URL(string: url.value) else {
             completion(.failure(.apiError))
@@ -43,7 +42,6 @@ class Network: NetworkProtocol {
     }
 }
 
-
 private extension Network {
     private func handleErrorHTTPResponse(response: URLResponse?,
                                          completion: @escaping (CustomError) -> Void) {
@@ -64,10 +62,11 @@ private extension Network {
         }
     }
     
-    private func decodableJSON(jsonData: Data, completion: @escaping Completion) {
+    private func decodableJSON<T: Decodable>(jsonData: Data,
+                                             completion: @escaping (APIResponse<T>) -> Void) {
         do {
             let decoder = JSONDecoder()
-            let decoded = try decoder.decode(CurrentWeatherResponse.self, from: jsonData)
+            let decoded = try decoder.decode(T.self, from: jsonData)
             completion(.success([decoded]))
         } catch {
             completion(.failure(.decodableError(error)))

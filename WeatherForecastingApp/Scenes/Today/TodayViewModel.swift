@@ -37,7 +37,8 @@ class TodayViewModel: TodayViewModelProtocol {
     
     func getCurrentWeather(at place: String) {
         status = .loading
-        network.request(url: .currentWeather(place)) { [weak self] result in
+        network.request(url: .currentWeather(place)) {[weak self] (result: APIResponse<CurrentWeatherResponse>) in
+
             self?.status = .stopLoading
             switch result {
             case let .failure(error):

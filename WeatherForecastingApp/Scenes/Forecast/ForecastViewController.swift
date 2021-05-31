@@ -16,14 +16,13 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .blue
+
         viewModel.fetchForecast(place: place)
         configureView()
     }
     
     private lazy var label: UILabel = {
         let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
         label.text = "TESTasdfsdfsdfsadfsd"
         label.textColor = .black
         label.font = .italicSystemFont(ofSize: 50)
@@ -34,12 +33,16 @@ class ForecastViewController: UIViewController {
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
-        //tableView.delegate = self
+        tableView.delegate = self
+        tableView.showsVerticalScrollIndicator = false
+        tableView.separatorStyle = .none
         //tableView.rowHeight = 120
         tableView.register(ForecastCell.self,
                            forCellReuseIdentifier: String(describing: ForecastCell.self))
+        tableView.register(ForecastHeaderView.self,
+                           forHeaderFooterViewReuseIdentifier: String(describing: ForecastHeaderView.self))
         //tableView.backgroundView = activity
-        //tableView.tableHeaderView = 
+        //tableView.tableHeaderView = UIView()
         //tableView.tableFooterView = UIView()
         return tableView
     }()
@@ -55,6 +58,10 @@ class ForecastViewController: UIViewController {
 }
 
 extension ForecastViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return 5
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 3
     }
@@ -65,6 +72,19 @@ extension ForecastViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension ForecastViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView
+        
+        return view
+    }
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//
+//    }
 }
 
 extension ForecastViewController: ForecastViewModelDelegate {

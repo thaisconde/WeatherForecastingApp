@@ -16,7 +16,7 @@ class ForecastViewModel: ForecastViewModelProtocol {
         self.service = service
     }
     
-    var status: ViewStatus = .none {
+    private var status: ViewStatus = .none {
         didSet {
             delegate?.updateView(with: status)
         }
@@ -31,7 +31,6 @@ class ForecastViewModel: ForecastViewModelProtocol {
             case let .success(response):
                 self.status = .success
                 self.forecast = response
-                print(response)
             case let .failure(error):
                 self.status = .error(error.localizedDescription)
             }

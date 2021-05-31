@@ -1,15 +1,17 @@
 import UIKit
 
-class ForecastHeaderSection: UIView {
+class ForecastHeaderView: UITableViewHeaderFooterView {
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    override init(reuseIdentifier: String?) {
+        super.init(reuseIdentifier: reuseIdentifier)
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
+        commonInit()
     }
-    
+        
     private func commonInit() {
         setupView()
     }
@@ -38,12 +40,13 @@ class ForecastHeaderSection: UIView {
     
     private func setupConstraints() {
         dayLabel.snp.makeConstraints {
-            $0.top.bottom.leading.equalToSuperview()
-            $0.trailing.greaterThanOrEqualTo(dateLabel).offset(-8)
+            $0.top.bottom.leading.equalToSuperview().inset(Size.medium.rawValue)
+            $0.trailing.greaterThanOrEqualTo(dateLabel).offset(-Size.small.rawValue)
         }
         
         dateLabel.snp.makeConstraints {
-            $0.top.bottom.trailing.equalToSuperview()
+            $0.trailing.equalToSuperview().offset(-Size.small.rawValue)
+            $0.top.bottom.centerX.centerY.equalTo(dayLabel)
         }
     }
 }

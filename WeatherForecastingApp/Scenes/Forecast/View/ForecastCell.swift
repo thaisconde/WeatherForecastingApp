@@ -4,6 +4,7 @@ class ForecastCell: UITableViewCell {
     private enum Layout: CGFloat {
         case contentIconSize = 48
         case contentIconRadius = 24
+        case imageSize = 28.8
     }
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -83,7 +84,8 @@ class ForecastCell: UITableViewCell {
     
     private func setupConstraints() {
         wrapperView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.trailing.leading.equalToSuperview().inset(Size.medium.rawValue)
+            $0.top.bottom.equalToSuperview().inset(Size.xsmall.rawValue)
         }
         
         contentIconView.snp.makeConstraints {
@@ -94,7 +96,7 @@ class ForecastCell: UITableViewCell {
         
         iconImageView.snp.makeConstraints {
             $0.center.equalToSuperview()
-            $0.size.equalTo(Layout.contentIconSize.rawValue)
+            $0.size.equalTo(Layout.imageSize.rawValue)
         }
         
         timeLabel.snp.makeConstraints {
@@ -111,6 +113,11 @@ class ForecastCell: UITableViewCell {
         temperatureLabel.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview().inset(Size.medium.rawValue)
         }
+    }
+}
+extension ForecastCell {
+    func setupCell(forecastData: ForecastWeatherResponse) {
+        
     }
 }
 

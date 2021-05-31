@@ -1,11 +1,13 @@
 enum Endpoint {
     case currentWeather(String)
+    case forecastWeather(String)
     
     var value: String {
-        if case let .currentWeather(place) = self {
-            return
-            "https://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=58fc3b37673e227b20819f4bcf0c71f6"
+        switch self {
+        case let .currentWeather(place):
+            return "https://api.openweathermap.org/data/2.5/weather?q=\(place)&appid=58fc3b37673e227b20819f4bcf0c71f6&units=metric"
+        case let .forecastWeather(place):
+            return "https://api.openweathermap.org/data/2.5/forecast?q=\(place)&appid=58fc3b37673e227b20819f4bcf0c71f6&units=metric"
         }
-        return String()
     }
 }

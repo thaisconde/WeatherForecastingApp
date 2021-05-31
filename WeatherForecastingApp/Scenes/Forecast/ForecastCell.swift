@@ -1,26 +1,24 @@
 import UIKit
 
-class CellView: UIView {
-    
+class ForecastCell: UITableViewCell {
     private enum Layout: CGFloat {
         case contentIconSize = 48
         case contentIconRadius = 24
     }
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        commonInit()
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        
+        setupView()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        commonInit()
-    }
-    
-    private func commonInit() {
+        
         setupView()
     }
     
+//MARK: - VIEW
     private lazy var wrapperView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(Size.medium.rawValue)
@@ -113,5 +111,11 @@ class CellView: UIView {
         temperatureLabel.snp.makeConstraints {
             $0.top.bottom.trailing.equalToSuperview().inset(Size.medium.rawValue)
         }
+    }
+}
+
+extension ForecastCell {
+    override func prepareForReuse() {
+        super.prepareForReuse()
     }
 }

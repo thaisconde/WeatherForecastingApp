@@ -16,21 +16,39 @@ class ForecastViewController: UIViewController {
         return label
     }()
     
-    private lazy var cell = CellView()
+    
+    private lazy var tableView: UITableView = {
+        let tableView = UITableView(frame: .zero, style: .plain)
+        tableView.dataSource = self
+        //tableView.delegate = self
+        //tableView.rowHeight = 120
+        tableView.register(ForecastCell.self,
+                           forCellReuseIdentifier: String(describing: ForecastCell.self))
+        //tableView.backgroundView = activity
+        //tableView.tableHeaderView = 
+        //tableView.tableFooterView = UIView()
+        return tableView
+    }()
+    
    
     func configureView() {
-        //view.addSubview(label)
-        view.addSubview(cell)
+        view.addSubview(tableView)
         
-        cell.snp.makeConstraints {
-            $0.leading.trailing.equalToSuperview()
-            $0.top.equalToSuperview().offset(70)
+        tableView.snp.makeConstraints {
+            $0.edges.equalToSuperview()
         }
+    }
+}
+
+extension ForecastViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 3
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastCell.self), for: indexPath) as? ForecastCell else {
+            return UITableViewCell() }
         
-//        NSLayoutConstraint.activate([
-//            label.topAnchor.constraint(equalTo: view.topAnchor, constant: 180),
-//            label.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            label.leadingAnchor.constraint(equalTo: view.leadingAnchor)
-//        ])
+        return cell
     }
 }

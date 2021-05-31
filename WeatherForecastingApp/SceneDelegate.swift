@@ -14,9 +14,15 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         let service = Network()
+        
         let firstViewModel = TodayViewModel(network: service)
+        let secondViewModel = ForecastViewModel(service: service)
+        
         let firstViewController = TodayViewController(viewModel: firstViewModel)
-        let rootVC = TabBarController(firstViewController: firstViewController)
+        let secondViewController = ForecastViewController(viewModel: secondViewModel)
+        
+        let rootVC = TabBarController(firstViewController: firstViewController,
+                                      secondViewController: secondViewController)
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
         window = UIWindow(frame: UIScreen.main.bounds)

@@ -7,9 +7,11 @@ class TabBarController: UITabBarController {
     private let secondImageName = "TabBarForecast-Light"
     
     let firstViewController: TodayViewController
+    let secondViewController: ForecastViewController
 
-    init(firstViewController: TodayViewController) {
+    init(firstViewController: TodayViewController, secondViewController: ForecastViewController) {
         self.firstViewController = firstViewController
+        self.secondViewController = secondViewController
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -50,17 +52,9 @@ private extension TabBarController {
             createNavController(for: firstViewController,
                                 title: firstTabName,
                                 image: fistImage),
-            createNavController(for: ForecastViewController(),
+            createNavController(for: secondViewController,
                                 title: secondTabName,
                                 image: secondImage)
-            
-//
-//            createNavController(for: firstViewController,
-//                                title: firstTabName,
-//                                image: UIImage(systemName: "pencil.circle")!),
-//            createNavController(for: ForecastViewController(),
-//                                title: secondTabName,
-//                                image: UIImage(systemName: "pencil.circle")!)
         ]
     }
     

@@ -1,9 +1,23 @@
 import UIKit
 
 class ForecastViewController: UIViewController {
+    private var viewModel: ForecastViewModelProtocol
+    private let place = "Praga"
+    
+    init(viewModel: ForecastViewModelProtocol) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel.delegate = self
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
+        viewModel.fetchForecast(place: place)
         configureView()
     }
     
@@ -50,5 +64,11 @@ extension ForecastViewController: UITableViewDataSource {
             return UITableViewCell() }
         
         return cell
+    }
+}
+
+extension ForecastViewController: ForecastViewModelDelegate {
+    func updateView(with status: ViewStatus) {
+        print(status)
     }
 }

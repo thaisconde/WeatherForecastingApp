@@ -4,5 +4,5 @@ struct CurrentWeatherResponse: Decodable {
     let id: Int
     let name: String
     let cod: Int
+    let wind: Wind
 }
-

@@ -9,14 +9,17 @@ class ForecastCell: UITableViewCell {
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        
-        setupView()
+        commonInit()
     }
     
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        
+        commonInit()
+    }
+    
+    private func commonInit() {
         setupView()
+        selectionStyle = .none
     }
     
 //MARK: - VIEW
@@ -45,8 +48,7 @@ class ForecastCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.text = "19ºC"
+        label.font = UIFont.Style(.contentMedium)
         return label
     }()
     
@@ -54,7 +56,8 @@ class ForecastCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Prague, Czech Republic"
+        label.font = UIFont.Style(.contentSmall)
+        label.textColor = UIColor(hex: "#949494")
         return label
     }()
     
@@ -62,7 +65,7 @@ class ForecastCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .right
         label.numberOfLines = 0
-        label.text = "17C"
+        label.font = UIFont.Style(.headline3)
         return label
     }()
     
@@ -84,8 +87,9 @@ class ForecastCell: UITableViewCell {
     
     private func setupConstraints() {
         wrapperView.snp.makeConstraints {
-            $0.trailing.leading.equalToSuperview().inset(Size.medium.rawValue)
-            $0.top.bottom.equalToSuperview().inset(Size.xsmall.rawValue)
+            $0.top.equalToSuperview()
+            $0.trailing.leading.equalToSuperview().inset(Size.big.rawValue)
+            $0.bottom.equalToSuperview().inset(Size.small.rawValue)
         }
         
         contentIconView.snp.makeConstraints {
@@ -116,8 +120,12 @@ class ForecastCell: UITableViewCell {
     }
 }
 extension ForecastCell {
-    func setupCell(forecastData: ForecastWeatherResponse) {
-        
+    func setupCell(weatherList: List) {
+        guard let itemWeather = weatherList.weather.first else { return }
+        iconImageView.image = UIImage(named: itemWeather.icon.forecastIcon)
+        descriptionLabel.text = itemWeather.icon.title
+        temperatureLabel.text = weatherList.main.temp?.stringCelsius
+        timeLabel.text = "Now"//weatherList.date
     }
 }
 

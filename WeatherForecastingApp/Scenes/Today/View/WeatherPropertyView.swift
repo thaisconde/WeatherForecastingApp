@@ -30,7 +30,6 @@ class WeatherPropertyView: UIView {
     
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pencil.circle")
         return imageView
     }()
     
@@ -46,7 +45,6 @@ class WeatherPropertyView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "19ºC"
         return label
     }()
     
@@ -54,7 +52,6 @@ class WeatherPropertyView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Prague, Czech Republic"
         return label
     }()
     

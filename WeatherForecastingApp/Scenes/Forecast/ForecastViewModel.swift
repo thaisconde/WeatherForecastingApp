@@ -1,6 +1,7 @@
 protocol ForecastViewModelProtocol {
     func fetchForecast(place: String)
     var delegate: ForecastViewModelDelegate? {get set}
+    var forecast: ForecastWeatherResponse? { get }
 }
 
 protocol ForecastViewModelDelegate: AnyObject {
@@ -10,7 +11,7 @@ protocol ForecastViewModelDelegate: AnyObject {
 class ForecastViewModel: ForecastViewModelProtocol {
     private let service: NetworkProtocol
     weak var delegate: ForecastViewModelDelegate?
-    var forecast: [ForecastWeatherResponse] = []
+    var forecast: ForecastWeatherResponse?
     
     init(service: NetworkProtocol) {
         self.service = service
@@ -32,7 +33,8 @@ class ForecastViewModel: ForecastViewModelProtocol {
                 self.status = .success
                 self.forecast = response
             case let .failure(error):
-                self.status = .error(error.localizedDescription)
+                self.status = .error(error.errorDescription)
+                print(error.errorDescription)
             }
         }
     }

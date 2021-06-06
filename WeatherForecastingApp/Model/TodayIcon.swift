@@ -91,9 +91,9 @@ enum Icon: String, Decodable {
         
         switch self {
         case .clearSkyDay:
-            description = "It`s hot as f***."
+            description = "It's hot as f***."
         case .clearSkyNight:
-            description = "It`s nice there."
+            description = "It's nice there."
         case .fewCloudsDay, .fewCloudsNight:
             description = "Just a few clouds."
         case .scatteredCloudsDay, .scatteredCloudsNight:
@@ -101,15 +101,15 @@ enum Icon: String, Decodable {
         case .brokenCloudsDay, .brokenCloudsNight:
             description = "Random clouds."
         case .showerRainDay, .showerRainNight:
-            description = "It’s raining!"
+            description = "It's raining!"
         case .rainDay, .rainNight:
             description = "Get your umbrella."
         case .thunderstormDay, .thunderstormNight:
-            description = "It’s hell out there!"
+            description = "It's hell out there!"
         case .snowDay, .snowNight:
             description = "Winter is coming!"
         case .mistDay, .mistNight:
-            description = "Can’t see anything!"
+            description = "Can't see anything!"
         }
         return description
     }

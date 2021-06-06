@@ -21,7 +21,6 @@ class TemperatureView: UIView {
         
     lazy var forecastImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pencil.circle")
         return imageView
     }()
     
@@ -29,7 +28,7 @@ class TemperatureView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "19ºC"
+        label.font = UIFont.Style(.headline3)
         return label
     }()
     
@@ -37,7 +36,8 @@ class TemperatureView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.text = "Prague, Czech Republic"
+        label.font = UIFont.Style(.contentRegular)
+        label.textColor = UIColor(hex: "#949494")
         return label
     }()
     

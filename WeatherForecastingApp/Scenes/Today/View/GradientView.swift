@@ -2,80 +2,40 @@ import Foundation
 import UIKit
 
 class GradientView: UIView {
-    let componentsColor: [CGFloat] = [ 0, 0, 0, 0.9, 0, 0, 0, 0]
-    let locations: [CGFloat] = [0, 1]
-    let colorQyt: Int = 2
+    private let innerColorBlue = UIColor(hex: "3861F0")?.cgColor
+    private let middleColorBlue = UIColor(hex: "8DD0F6")?.cgColor
+    private let endColorBlue = UIColor(hex: "FFFFFF")?.withAlphaComponent(0.53).cgColor
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        self.comomInit()
+    private let innerColorYellow = UIColor(hex: "#FCBA56")?.cgColor
+    private let middleColorYellow  = UIColor(hex: "#FCEC98")?.cgColor
+    private let endColorYellow = UIColor(hex: "#FFFFFF")?.cgColor
+    
+    private var colorToApply: [CGColor?] = []
+    private let starPoint = CGPoint(x: 1, y: 0)
+    private let endPoint = CGPoint(x: 0, y: 1)
+    private let location: [NSNumber] = [0.0, 0.4, 0.6]
+    
+    required init(isItRaining: Bool) {
+        colorToApply = isItRaining
+            ? [innerColorBlue, middleColorBlue, endColorBlue]
+            : [innerColorYellow, middleColorYellow, endColorYellow]
+        super.init(frame: .zero)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        self.comomInit()
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
-    func comomInit(){
-        self.backgroundColor = UIColor.clear
-        autoresizingMask = [.flexibleWidth, .flexibleHeight]
-    }
-    
-    override func draw(_ rect: CGRect) {
-        guard let gradient = customizeEffect() else { return }
-        //effectMiddleDown(gradient: gradient)
-        //effectMiddleUp(gradient: gradient)
-        singleEffect(gradient: gradient)
-    }
-    
-    private func customizeEffect() -> CGGradient? {
-        let colorSpace = CGColorSpaceCreateDeviceRGB()
-        guard let gradient = CGGradient(colorSpace: colorSpace,
-                                        colorComponents: componentsColor,
-                                        locations: locations,
-                                        count: colorQyt) else {return nil}
-        return gradient
-    }
-    
-    private func singleEffect(gradient: CGGradient){
-        let context = UIGraphicsGetCurrentContext()
-        let startCenter = CGPoint(x: bounds.width, y: 0)
-        let startRadius: CGFloat = 120
-        let endCenter = CGPoint(x: bounds.width/4, y: bounds.height/4)
-        let endRadius: CGFloat = bounds.height
-       
-        context?.drawRadialGradient(gradient,
-                                    startCenter: startCenter,
-                                    startRadius: startRadius,
-                                    endCenter: endCenter,
-                                    endRadius: endRadius,
-                                    options: .drawsAfterEndLocation)
-        
-//        let startPoint = CGPoint(x: 0, y: bounds.height)
-//        let endPoint = CGPoint(x: bounds.width, y: 0)
-//        context?.drawLinearGradient(gradient,
-//                                    start: startPoint,
-//                                    end: endPoint,
-//                                    options: .drawsAfterEndLocation)
-    }
-    
-    private func effectMiddleDown(gradient: CGGradient){
-        let context = UIGraphicsGetCurrentContext()
-        let startPoint = CGPoint(x: 0, y: bounds.midY)
-        let endPoint = CGPoint(x: 0, y: bounds.height)
-        context?.drawLinearGradient(gradient,
-                                    start: startPoint ,
-                                    end:  endPoint ,
-                                    options: .drawsAfterEndLocation)
-    }
-    
-    private func effectMiddleUp(gradient: CGGradient){
-        let context = UIGraphicsGetCurrentContext()
-        let startPoint = CGPoint(x: 0, y: bounds.midY)
-        let endPoint =  CGPoint.zero
-        context?.drawLinearGradient(gradient,
-                                    start: startPoint ,
-                                    end:  endPoint ,
-                                    options: .drawsAfterEndLocation)
+    override func layoutSubviews() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.colors = colorToApply as [Any]
+        gradientLayer.startPoint = starPoint
+        gradientLayer.endPoint = endPoint
+        gradientLayer.type = .axial
+        gradientLayer.locations = location
+        gradientLayer.frame = self.bounds
+        //gradientLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/45, 0, 0, 1)
+        //gradientLayer.cornerRadius = bounds.width / 2
+        self.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

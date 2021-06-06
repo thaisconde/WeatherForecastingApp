@@ -1,0 +1,54 @@
+// swiftlint:disable all
+// Generated using SwiftGen — https://github.com/SwiftGen/SwiftGen
+
+import Foundation
+
+// swiftlint:disable superfluous_disable_command file_length implicit_return
+
+// MARK: - Strings
+
+// swiftlint:disable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:disable nesting type_body_length type_name vertical_whitespace_opening_braces
+internal enum Strings {
+  /// Share
+  internal static let share = Strings.tr("Localizable", "share")
+
+  internal enum Forescast {
+    /// Forecast
+    internal static let title = Strings.tr("Localizable", "Forescast.title")
+  }
+
+  internal enum ErrorView {
+    /// Try Again
+    internal static let firstOptionButton = Strings.tr("Localizable", "errorView.firstOptionButton")
+    /// 
+    internal static let message = Strings.tr("Localizable", "errorView.message")
+    /// OK
+    internal static let secondOptionButton = Strings.tr("Localizable", "errorView.secondOptionButton")
+    /// Sorry...
+    internal static let title = Strings.tr("Localizable", "errorView.title")
+  }
+}
+// swiftlint:enable explicit_type_interface function_parameter_count identifier_name line_length
+// swiftlint:enable nesting type_body_length type_name vertical_whitespace_opening_braces
+
+// MARK: - Implementation Details
+
+extension Strings {
+  private static func tr(_ table: String, _ key: String, _ args: CVarArg...) -> String {
+    let format = BundleToken.bundle.localizedString(forKey: key, value: nil, table: table)
+    return String(format: format, locale: Locale.current, arguments: args)
+  }
+}
+
+// swiftlint:disable convenience_type
+private final class BundleToken {
+  static let bundle: Bundle = {
+    #if SWIFT_PACKAGE
+    return Bundle.module
+    #else
+    return Bundle(for: BundleToken.self)
+    #endif
+  }()
+}
+// swiftlint:enable convenience_type

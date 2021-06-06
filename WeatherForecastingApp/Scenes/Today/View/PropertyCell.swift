@@ -9,6 +9,14 @@ extension PropertyCell.Layout {
 }
 
 final class PropertyCell: UICollectionViewCell {
+    
+    private let property = ["Humidity", "Precipitation", "Pressure", "Wind", "Direction"]
+    private let iconString = ["TodayHumidity-Light",
+                              "TodayPrecipitation-Light",
+                              "TodayPressure-Light",
+                              "TodayWindDirection-Light",
+                              "TodayWindSpeed-Light"]
+    
     fileprivate enum Layout {}
     
     override init(frame: CGRect) {
@@ -25,7 +33,7 @@ final class PropertyCell: UICollectionViewCell {
     }
     
 //MARK: - LAYOUT
-    private lazy var wrapperView: UIView = {
+    private lazy var wrapperImageView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = Layout.Size.cornerRadius
         view.clipsToBounds = true
@@ -33,9 +41,8 @@ final class PropertyCell: UICollectionViewCell {
         return view
     }()
     
-    lazy var iconImageView: UIImageView = {
+    private lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pencil.circle")
         return imageView
     }()
     
@@ -43,23 +50,25 @@ final class PropertyCell: UICollectionViewCell {
         let stackView = UIStackView()
         stackView.alignment = .leading
         stackView.axis = .vertical
+        stackView.distribution = .fill
         stackView.spacing = CGFloat(Size.small.rawValue)
         return stackView
     }()
     
-    lazy var valueLabel: UILabel = {
+    private lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.text = "19ºC"
+        label.font = UIFont.Style(.contentSmall)
+        //label.numberOfLines = 0
         return label
     }()
     
-    lazy var nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.numberOfLines = 0
-        label.text = "Prague, Czech Republic"
+        label.font = UIFont.Style(.contentSmall)
+        label.textColor = UIColor(hex: "#949494")
+        //label.numberOfLines = 0
         return label
     }()
     
@@ -70,13 +79,13 @@ final class PropertyCell: UICollectionViewCell {
     
     private func createSubviews() {
         addSubview(stackView)
-        addSubview(wrapperView)
+        addSubview(wrapperImageView)
         
-        stackView.addArrangedSubview(wrapperView)
+        stackView.addArrangedSubview(wrapperImageView)
         stackView.addArrangedSubview(valueLabel)
         stackView.addArrangedSubview(nameLabel)
         
-        wrapperView.addSubview(iconImageView)
+        wrapperImageView.addSubview(iconImageView)
     }
     
     private func setupConstraints() {
@@ -84,7 +93,7 @@ final class PropertyCell: UICollectionViewCell {
             $0.edges.equalToSuperview()
         }
         
-        wrapperView.snp.makeConstraints {
+        wrapperImageView.snp.makeConstraints {
             $0.size.equalTo(Layout.Size.wraperImage)
         }
         
@@ -100,7 +109,32 @@ final class PropertyCell: UICollectionViewCell {
 }
 
 extension PropertyCell {
-    func setupCell(with property: Weather) {
-        iconImageView.image = UIImage(named: property.icon.todayIcon)
+    func setupCell(currentWeather: CurrentWeatherResponse, indexPath: IndexPath) {
+        guard indexPath.contains(indexPath.row) else { return }
+        iconImageView.image = UIImage(named: iconString[indexPath.row])
+        valueLabel.text = "56%"
+        nameLabel.text = property[indexPath.row]
+        
+        switch indexPath.row {
+        case 0:
+            valueLabel.text = String(currentWeather.main.humidity ?? 0)+"%"
+        case 1:
+            valueLabel.text = "1.0MM"
+        case 2:
+            valueLabel.text = String(currentWeather.main.pressure ?? 0)+"hPa"
+        case 3:
+            valueLabel.text = currentWeather.wind.speed.msTokmh
+        case 4:
+            valueLabel.text = String(currentWeather.wind.deg) //currentWeather.wind.deg.windSimbol
+        default:
+            break
+        }
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        nameLabel.text = nil
+        iconImageView.image = nil
+        valueLabel.text = nil
     }
 }

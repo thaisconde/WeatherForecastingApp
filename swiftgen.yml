@@ -1,0 +1,19 @@
+input_dir: WeatherForecastingApp
+output_dir: WeatherForecastingApp/Generated/
+xcassets:
+  inputs: Resources/Images.xcassets
+  outputs:
+    templateName: swift5
+    output: Assets.generated.swift
+    params:
+      publicAccess: false
+      enumName: "Assets"
+      forceProvidesNamespaces: true
+strings:
+  inputs: Resources/Localizable
+  outputs:
+    templateName: structured-swift5
+    output: Strings.generated.swift
+    params:
+      publicAccess: false
+      enumName: "Strings"

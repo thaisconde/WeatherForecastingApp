@@ -16,16 +16,15 @@ class ForecastViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         viewModel.fetchForecast(place: place)
         configureView()
     }
     
-    private lazy var label: UILabel = {
+    private lazy var titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "TESTasdfsdfsdfsadfsd"
-        label.textColor = .black
-        label.font = .italicSystemFont(ofSize: 50)
+        label.text = "Forecast"
+        label.font = UIFont.Style(.headline2)
         return label
     }()
     
@@ -49,10 +48,18 @@ class ForecastViewController: UIViewController {
     
    
     func configureView() {
+        view.addSubview(titleLabel)
         view.addSubview(tableView)
         
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview().inset(Size.big.rawValue)
+        }
+        
         tableView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.top.equalTo(titleLabel.snp.bottom).offset(Size.big.rawValue)
+            $0.bottom.equalTo(view.safeAreaLayoutGuide)
+            $0.leading.trailing.equalToSuperview()
         }
     }
 }
@@ -70,6 +77,10 @@ extension ForecastViewController: UITableViewDataSource {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastCell.self), for: indexPath) as? ForecastCell else {
             return UITableViewCell() }
         
+        guard let weatherList = viewModel.forecast?.list[indexPath.row] else { return  UITableViewCell()}
+        
+        cell.setupCell(weatherList: weatherList)
+        
         return cell
     }
 }
@@ -77,18 +88,39 @@ extension ForecastViewController: UITableViewDataSource {
 extension ForecastViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         
-        let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView else {return UIView()}
+        
+        guard let data = viewModel.forecast?.list[section] else { return UIView() }
+        view.setupData(with: data)
         
         return view
     }
-    
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//
-//    }
 }
 
 extension ForecastViewController: ForecastViewModelDelegate {
     func updateView(with status: ViewStatus) {
-        print(status)
+        DispatchQueue.main.async { [weak self] in
+            guard let self = self else { return }
+            switch status {
+            case .success:
+                self.tableView.reloadData()
+                self.printDate()
+            default:
+                print("qualquer coisa")
+            }
+        }
+    }
+    
+    func printDate() {
+//        let localISOFormatter = ISO8601DateFormatter()
+//        localISOFormatter.timeZone = TimeZone.current
+//
+        print(self.viewModel.forecast?.list[1].date)
+//        print(localISOFormatter.string(from: a))
+        
+//        let iso8601DateFormatter = ISO8601DateFormatter()
+//        iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//        let string = iso8601DateFormatter.string(from: a)
+//        print(string)
     }
 }

@@ -2,7 +2,7 @@ import Foundation
 
 //existe alguma forma de deixar esse typealias privado?
 
-typealias APIResponse<T> = Result<[T], CustomError>
+typealias APIResponse<T> = Result<T, CustomError>
 
 protocol NetworkProtocol {
     func request<T: Decodable>(url: Endpoint, completion: @escaping (APIResponse<T>) -> Void)
@@ -43,8 +43,8 @@ class Network: NetworkProtocol {
 }
 
 private extension Network {
-    private func handleErrorHTTPResponse(response: URLResponse?,
-                                         completion: @escaping (CustomError) -> Void) {
+    func handleErrorHTTPResponse(response: URLResponse?,
+                                 completion: @escaping (CustomError) -> Void) {
         
         if let response = response as? HTTPURLResponse {
             switch response.statusCode {
@@ -62,12 +62,12 @@ private extension Network {
         }
     }
     
-    private func decodableJSON<T: Decodable>(jsonData: Data,
-                                             completion: @escaping (APIResponse<T>) -> Void) {
+    func decodableJSON<T: Decodable>(jsonData: Data,
+                                     completion: @escaping (APIResponse<T>) -> Void) {
         do {
             let decoder = JSONDecoder()
             let decoded = try decoder.decode(T.self, from: jsonData)
-            completion(.success([decoded]))
+            completion(.success(decoded))
         } catch {
             completion(.failure(.decodableError(error)))
         }

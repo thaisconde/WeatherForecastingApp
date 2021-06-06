@@ -18,7 +18,6 @@ target 'WeatherForecastingApp' do
 
 
   pod 'SnapKit', '~> 5.0.0'
-  #pod 'R.swift'
   pod 'SwiftLint'
   pod 'SwiftGen', '~> 6.0'
 

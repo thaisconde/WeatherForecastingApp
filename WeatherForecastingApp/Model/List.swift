@@ -5,7 +5,7 @@ struct List: Decodable {
     let main: Main
     let weather: [Weather]
 
-    enum codingKey: String, CodingKey {
+    enum CodingKeys: String, CodingKey {
         case main, weather
         case date = "dt"
     }

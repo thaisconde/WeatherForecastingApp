@@ -58,7 +58,7 @@ final class PropertyCell: UICollectionViewCell {
     private lazy var valueLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.Style(.contentSmall)
+        label.font = UIFont.style(.contentSmall)
         //label.numberOfLines = 0
         return label
     }()
@@ -66,7 +66,7 @@ final class PropertyCell: UICollectionViewCell {
     private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.Style(.contentSmall)
+        label.font = UIFont.style(.contentSmall)
         label.textColor = UIColor(hex: "#949494")
         //label.numberOfLines = 0
         return label

@@ -1,7 +1,7 @@
 protocol ForecastViewModelProtocol {
     func fetchForecast(place: String)
     var delegate: ForecastViewModelDelegate? {get set}
-    var forecast: ForecastWeatherResponse? { get }
+    var forecastByWeekday: [ForecastByWeekday] { get }
 }
 
 protocol ForecastViewModelDelegate: AnyObject {
@@ -11,7 +11,8 @@ protocol ForecastViewModelDelegate: AnyObject {
 class ForecastViewModel: ForecastViewModelProtocol {
     private let service: NetworkProtocol
     weak var delegate: ForecastViewModelDelegate?
-    var forecast: ForecastWeatherResponse?
+    
+    var forecastByWeekday: [ForecastByWeekday] = []
     
     init(service: NetworkProtocol) {
         self.service = service
@@ -30,12 +31,22 @@ class ForecastViewModel: ForecastViewModelProtocol {
             self.status = .stopLoading
             switch result {
             case let .success(response):
+                self.splitDateByWeekday(with: response.list)
                 self.status = .success
-                self.forecast = response
             case let .failure(error):
                 self.status = .error(error.errorDescription)
-                print(error.errorDescription)
             }
         }
     }
+    
+    func splitDateByWeekday(with response: [List]) {
+        let splitDataInToDictionary = Dictionary(grouping: response, by: { $0.date.toWeekday})
+       
+        forecastByWeekday = splitDataInToDictionary.map({ (key, value) in
+            return ForecastByWeekday(weekday: key, groupData: value)
+        })
+    }
 }
+
+//Dictionary(grouping:...) https://stackoverflow.com/questions/31220002/how-to-group-by-the-elements-of-an-array-in-swift
+//Aplication: https://www.ralfebert.de/ios-examples/uikit/uitableviewcontroller/grouping-sections/

@@ -1,4 +1,4 @@
-struct Main: Decodable {
+struct Main: Decodable, Equatable {
     let temp: Double?
     let pressure: Double?
     let humidity: Int?

@@ -1,7 +1,7 @@
 import Foundation
 
-struct List: Decodable {
-    let date: Date?
+struct List: Decodable, Equatable {
+    let date: TimeInterval //https://stackoverflow.com/questions/40648284/using-dateformatter-on-a-unix-timestamp
     let main: Main
     let weather: [Weather]
 

@@ -9,7 +9,8 @@ class TabBarController: UITabBarController {
     let firstViewController: TodayViewController
     let secondViewController: ForecastViewController
 
-    init(firstViewController: TodayViewController, secondViewController: ForecastViewController) {
+    init(firstViewController: TodayViewController,
+         secondViewController: ForecastViewController) {
         self.firstViewController = firstViewController
         self.secondViewController = secondViewController
         super.init(nibName: nil, bundle: nil)

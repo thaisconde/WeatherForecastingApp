@@ -24,16 +24,14 @@ class ForecastHeaderView: UITableViewHeaderFooterView {
     
     lazy var dayLabel: UILabel = {
         let label = UILabel()
-        label.text = "TODAY"
-        label.font = UIFont.Style(.headline4)
+        label.font = UIFont.style(.headline4)
         return label
     }()
     
     lazy var dateLabel: UILabel = {
         let label = UILabel()
-        label.font = UIFont.Style(.contentSmall)
+        label.font = UIFont.style(.contentSmall)
         label.textColor = UIColor(hex: "#949494")
-       // label.text = "\(Date())"
         return label
     }()
     
@@ -50,12 +48,12 @@ class ForecastHeaderView: UITableViewHeaderFooterView {
         
         dateLabel.snp.makeConstraints {
             $0.trailing.equalToSuperview().offset(-Size.big.rawValue)
-            $0.top.bottom.centerX.centerY.equalTo(dayLabel)
+            $0.centerY.equalTo(dayLabel)
         }
     }
     
-    func setupData(with list: List) {
-        
-        //dateLabel.text = list.date
+    func setupData(with list: String) {
+        dayLabel.text = list
+       // dateLabel.text = list.date.firstFormatter
     }
 }

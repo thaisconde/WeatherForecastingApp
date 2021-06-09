@@ -24,7 +24,7 @@ class ForecastViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "Forecast"
-        label.font = UIFont.Style(.headline2)
+        label.font = UIFont.style(.headline2)
         return label
     }()
     
@@ -66,18 +66,18 @@ class ForecastViewController: UIViewController {
 
 extension ForecastViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return 5
+        return viewModel.forecastByWeekday.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 3
+        return viewModel.forecastByWeekday[section].groupData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastCell.self), for: indexPath) as? ForecastCell else {
             return UITableViewCell() }
-        
-        guard let weatherList = viewModel.forecast?.list[indexPath.row] else { return  UITableViewCell()}
+
+        let weatherList = viewModel.forecastByWeekday[indexPath.section].groupData[indexPath.row]
         
         cell.setupCell(weatherList: weatherList)
         
@@ -90,7 +90,7 @@ extension ForecastViewController: UITableViewDelegate {
         
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView else {return UIView()}
         
-        guard let data = viewModel.forecast?.list[section] else { return UIView() }
+        let data = viewModel.forecastByWeekday[section].weekday
         view.setupData(with: data)
         
         return view
@@ -104,23 +104,9 @@ extension ForecastViewController: ForecastViewModelDelegate {
             switch status {
             case .success:
                 self.tableView.reloadData()
-                self.printDate()
             default:
-                print("qualquer coisa")
+                break
             }
         }
-    }
-    
-    func printDate() {
-//        let localISOFormatter = ISO8601DateFormatter()
-//        localISOFormatter.timeZone = TimeZone.current
-//
-        print(self.viewModel.forecast?.list[1].date)
-//        print(localISOFormatter.string(from: a))
-        
-//        let iso8601DateFormatter = ISO8601DateFormatter()
-//        iso8601DateFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-//        let string = iso8601DateFormatter.string(from: a)
-//        print(string)
     }
 }

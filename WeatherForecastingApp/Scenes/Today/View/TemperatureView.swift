@@ -28,7 +28,7 @@ class TemperatureView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont.Style(.headline3)
+        label.font = UIFont.style(.headline3)
         return label
     }()
     
@@ -36,7 +36,7 @@ class TemperatureView: UIView {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont.Style(.contentRegular)
+        label.font = UIFont.style(.contentRegular)
         label.textColor = UIColor(hex: "#949494")
         return label
     }()

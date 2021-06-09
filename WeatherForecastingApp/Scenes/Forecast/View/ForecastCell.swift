@@ -48,7 +48,7 @@ class ForecastCell: UITableViewCell {
     lazy var timeLabel: UILabel = {
         let label = UILabel()
         label.textAlignment = .left
-        label.font = UIFont.Style(.contentMedium)
+        label.font = UIFont.style(.contentMedium)
         return label
     }()
     
@@ -56,7 +56,7 @@ class ForecastCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont.Style(.contentSmall)
+        label.font = UIFont.style(.contentSmall)
         label.textColor = UIColor(hex: "#949494")
         return label
     }()
@@ -65,7 +65,7 @@ class ForecastCell: UITableViewCell {
         let label = UILabel()
         label.textAlignment = .right
         label.numberOfLines = 0
-        label.font = UIFont.Style(.headline3)
+        label.font = UIFont.style(.headline3)
         return label
     }()
     
@@ -125,7 +125,9 @@ extension ForecastCell {
         iconImageView.image = UIImage(named: itemWeather.icon.forecastIcon)
         descriptionLabel.text = itemWeather.icon.title
         temperatureLabel.text = weatherList.main.temp?.stringCelsius
-        timeLabel.text = "Now"//weatherList.date
+        timeLabel.text = weatherList.date.toHour
+        
+        let currentTime = Date().timeIntervalSinceReferenceDate
     }
 }
 

@@ -41,7 +41,7 @@ final class TodayViewController: UIViewController {
     private lazy var shareButton: UIButton = {
         let button = UIButton()
         button.setTitle("share".localized, for: .normal)
-        button.titleLabel?.font = UIFont.Style(.buttons)
+        button.titleLabel?.font = UIFont.style(.buttons)
         button.setTitleColor(UIColor(hex: "#000000"), for: .normal)
         button.backgroundColor = UIColor(hex: "#FFFFFF")?.withAlphaComponent(0.3)
         button.layer.cornerRadius = 20
@@ -57,7 +57,7 @@ final class TodayViewController: UIViewController {
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
-        label.font = UIFont.Style(.headline1)
+        label.font = UIFont.style(.headline1)
         label.numberOfLines = 0
         return label
     }()

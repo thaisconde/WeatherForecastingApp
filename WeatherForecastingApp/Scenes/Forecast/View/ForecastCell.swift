@@ -22,7 +22,7 @@ class ForecastCell: UITableViewCell {
         selectionStyle = .none
     }
     
-//MARK: - VIEW
+// MARK: - VIEW
     private lazy var wrapperView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = CGFloat(Size.medium.rawValue)
@@ -127,7 +127,7 @@ extension ForecastCell {
         temperatureLabel.text = weatherList.main.temp?.stringCelsius
         timeLabel.text = weatherList.date.toHour
         
-        let currentTime = Date().timeIntervalSinceReferenceDate
+        // let currentTime = Date().timeIntervalSinceReferenceDate
     }
 }
 

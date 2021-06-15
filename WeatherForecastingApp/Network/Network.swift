@@ -1,6 +1,6 @@
 import Foundation
 
-//existe alguma forma de deixar esse typealias privado?
+// existe alguma forma de deixar esse typealias privado?
 
 typealias APIResponse<T> = Result<T, CustomError>
 
@@ -10,14 +10,12 @@ protocol NetworkProtocol {
 
 class Network: NetworkProtocol {
     func request<T: Decodable>(url: Endpoint, completion: @escaping (APIResponse<T>) -> Void) {
-        
         guard let url = URL(string: url.value) else {
             completion(.failure(.apiError))
             return }
 
         let urlSession = URLSession.shared
-        let dataTask = urlSession.dataTask(with: url) { [self] (data, response, error) in
-            
+        let dataTask = urlSession.dataTask(with: url) { [self] data, response, error in
             if error != nil {
                 completion(.failure(.domainError))
                 return
@@ -25,7 +23,7 @@ class Network: NetworkProtocol {
             
             guard let responseStatus = response as? HTTPURLResponse,
                   case 200..<300 = responseStatus.statusCode else {
-                self.handleErrorHTTPResponse(response: response) { (error) in  //precisaria de um [weak self] aqui?
+                self.handleErrorHTTPResponse(response: response) { error in
                     completion(.failure(error))
                 }
                 return
@@ -45,7 +43,6 @@ class Network: NetworkProtocol {
 private extension Network {
     func handleErrorHTTPResponse(response: URLResponse?,
                                  completion: @escaping (CustomError) -> Void) {
-        
         if let response = response as? HTTPURLResponse {
             switch response.statusCode {
             case 401:
@@ -73,4 +70,3 @@ private extension Network {
         }
     }
 }
-

@@ -8,7 +8,7 @@ extension TimeInterval {
     //        return date
     //    }
     
-    //03:00 PM
+    // 03:00 PM
     var toHour: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
@@ -16,7 +16,7 @@ extension TimeInterval {
         return dateFormatter.string(from: date)
     }
     
-    //Tuesday
+    // Tuesday
     var toWeekday: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
@@ -24,7 +24,7 @@ extension TimeInterval {
         return dateFormatter.string(from: date)
     }
     
-    //Tuesday, 08 Jun
+    // Tuesday, 08 Jun
     var firstFormatter: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()

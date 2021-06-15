@@ -4,18 +4,19 @@ extension PropertyCell.Layout {
     enum Size {
         static let image: Int = 24
         static let wraperImage: Int = 40
-        static let cornerRadius: CGFloat = CGFloat(wraperImage / 2)
+        static let cornerRadius = CGFloat(wraperImage / 2)
     }
 }
 
 final class PropertyCell: UICollectionViewCell {
-    
     private let property = ["Humidity", "Precipitation", "Pressure", "Wind", "Direction"]
-    private let iconString = ["TodayHumidity-Light",
-                              "TodayPrecipitation-Light",
-                              "TodayPressure-Light",
-                              "TodayWindDirection-Light",
-                              "TodayWindSpeed-Light"]
+    private let iconString = [
+        "TodayHumidity-Light",
+        "TodayPrecipitation-Light",
+        "TodayPressure-Light",
+        "TodayWindDirection-Light",
+        "TodayWindSpeed-Light"
+    ]
     
     fileprivate enum Layout {}
     
@@ -32,7 +33,7 @@ final class PropertyCell: UICollectionViewCell {
         setupView()
     }
     
-//MARK: - LAYOUT
+// MARK: - LAYOUT
     private lazy var wrapperImageView: UIView = {
         let view = UIView()
         view.layer.cornerRadius = Layout.Size.cornerRadius
@@ -59,7 +60,7 @@ final class PropertyCell: UICollectionViewCell {
         let label = UILabel()
         label.textAlignment = .left
         label.font = UIFont.style(.contentSmall)
-        //label.numberOfLines = 0
+        // label.numberOfLines = 0
         return label
     }()
     
@@ -68,7 +69,7 @@ final class PropertyCell: UICollectionViewCell {
         label.textAlignment = .left
         label.font = UIFont.style(.contentSmall)
         label.textColor = UIColor(hex: "#949494")
-        //label.numberOfLines = 0
+        // label.numberOfLines = 0
         return label
     }()
     
@@ -117,15 +118,15 @@ extension PropertyCell {
         
         switch indexPath.row {
         case 0:
-            valueLabel.text = String(currentWeather.main.humidity ?? 0)+"%"
+            valueLabel.text = String(currentWeather.main.humidity ?? 0) + "%"
         case 1:
             valueLabel.text = "1.0MM"
         case 2:
-            valueLabel.text = String(currentWeather.main.pressure ?? 0)+"hPa"
+            valueLabel.text = String(currentWeather.main.pressure ?? 0) + "hPa"
         case 3:
             valueLabel.text = currentWeather.wind.speed.msTokmh
         case 4:
-            valueLabel.text = String(currentWeather.wind.deg) //currentWeather.wind.deg.windSimbol
+            valueLabel.text = String(currentWeather.wind.deg) // currentWeather.wind.deg.windSimbol
         default:
             break
         }

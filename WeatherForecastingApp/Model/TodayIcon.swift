@@ -20,7 +20,7 @@ enum Icon: String, Decodable {
     
     var forecastIcon: String {
         let prefix = "Today"
-        //let sufixDark = "-Dark"
+        // let sufixDark = "-Dark"
         let sufixLight = "-Light"
         var name: String
         
@@ -54,7 +54,7 @@ enum Icon: String, Decodable {
     
     var todayIcon: String {
         let prefix = "Forecast"
-        //let sufixDark = "-Dark"
+        // let sufixDark = "-Dark"
         let sufixLight = "-Light"
         var name: String
         
@@ -114,4 +114,3 @@ enum Icon: String, Decodable {
         return description
     }
 }
-

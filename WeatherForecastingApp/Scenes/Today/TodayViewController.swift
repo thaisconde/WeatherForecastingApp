@@ -8,11 +8,11 @@ final class TodayViewController: UIViewController {
     private var viewModel: TodayViewModelProtocol
     
     lazy var tabBarHeight: CGFloat = {
-        return self.tabBarController?.tabBar.frame.size.height ?? 0
+        self.tabBarController?.tabBar.frame.size.height ?? 0
     }()
     
     lazy var screenHeight: CGFloat = {
-        return UIScreen.main.bounds.size.height
+        UIScreen.main.bounds.size.height
     }()
     
     private enum Layout: Int {
@@ -50,7 +50,7 @@ final class TodayViewController: UIViewController {
                                               left: 16,
                                               bottom: 8,
                                               right: 16)
-        button.addTarget(self, action: #selector(shareButtonTapped) , for: .touchUpInside)
+        button.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -73,10 +73,10 @@ final class TodayViewController: UIViewController {
         layout.scrollDirection = .vertical
         
         layout.estimatedItemSize = CGSize(width: 96, height: 104)
-        //UICollectionViewFlowLayout.automaticSize
-            //CGSize(width: (UIScreen.main.bounds.width - 48) / 3, height: UIScreen.main.bounds.height / 2)
+        // UICollectionViewFlowLayout.automaticSize
+            // CGSize(width: (UIScreen.main.bounds.width - 48) / 3, height: UIScreen.main.bounds.height / 2)
             
-        //layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
+        // layout.sectionInset = UIEdgeInsets(top: 8, left: 8, bottom: 8, right: 8)
     
         let collectionView = UICollectionView(frame: .zero,
                                               collectionViewLayout: layout)
@@ -91,7 +91,7 @@ final class TodayViewController: UIViewController {
     }()
     
     private lazy var temperatureView = TemperatureView()
-    //private lazy var propertyView = WeatherPropertyView()
+    // private lazy var propertyView = WeatherPropertyView()
     private lazy var gradientView = GradientView(isItRaining: false)
     private lazy var loading = CustomLoadingView()
     
@@ -108,17 +108,15 @@ final class TodayViewController: UIViewController {
         gradientView.addSubview(temperatureView)
         gradientView.addSubview(titleLabel)
         gradientView.addSubview(shareButton)
-        
- 
     }
     
     func setupConstraints() {
         gradientView.snp.makeConstraints {
-            //let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
+            // let safeAreaHeight = view.safeAreaLayoutGuide.layoutFrame.size.height
 //            let statusBarHeight = UIApplication.shared.statusBarFrame.height
 //            let topSafeArea = view.safeAreaInsets.top
             $0.top.trailing.leading.equalToSuperview()
-            $0.height.equalTo((screenHeight - tabBarHeight) * 2/3)
+            $0.height.equalTo( (screenHeight - tabBarHeight) * 2 / 3 )
         }
         
         shareButton.snp.makeConstraints {
@@ -149,29 +147,28 @@ final class TodayViewController: UIViewController {
             $0.leading.trailing.equalToSuperview().inset(Size.big.rawValue)
             $0.bottom.equalTo(tabBarHeight).offset(-Size.medium.rawValue)
             
-            //view.safeAreaLayoutGuide
+            // view.safeAreaLayoutGuide
         }
     }
 }
-//MARK: - COLLECTION VIEW METHODS
+// MARK: - COLLECTION VIEW METHODS
 
 extension TodayViewController: UICollectionViewDataSource, UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        5
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PropertyCell.self), for: indexPath) as? PropertyCell else { return UICollectionViewCell()}
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PropertyCell.self), for: indexPath) as? PropertyCell else { return UICollectionViewCell() }
         
         guard let main = viewModel.currentWeather else { return UICollectionViewCell() }
-        cell.setupCell(currentWeather: main,  indexPath: indexPath)
+        cell.setupCell(currentWeather: main, indexPath: indexPath)
         return cell
     }
 }
 
 extension TodayViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-
 //        let screenWidth = UIScreen.main.bounds.width
 //        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: String(describing: PropertyCell.self), for: IndexPath(row: 0, section: section)) as? PropertyCell else { return 0.0}
 //
@@ -179,14 +176,14 @@ extension TodayViewController: UICollectionViewDelegateFlowLayout {
 //
 //        return (screenWidth - 3 * cellSize - 48 ) / 2
         
-        //CGSize(width: (UIScreen.main.bounds.width - 48) / 3, height: UIScreen.main.bounds.height / 2)
+        // CGSize(width: (UIScreen.main.bounds.width - 48) / 3, height: UIScreen.main.bounds.height / 2)
         
-        //return (UIScreen.main.bounds.width - 48 - 3*96 ) / 2
+        // return (UIScreen.main.bounds.width - 48 - 3*96 ) / 2
         return 60
     }
 }
 
-//MARK: - DELEGATE
+// MARK: - DELEGATE
 extension TodayViewController: TodayViewModelDelegate {
     func updateView(with status: ViewStatus) {
         DispatchQueue.main.async { [weak self] in
@@ -224,7 +221,7 @@ extension TodayViewController: TodayViewModelDelegate {
 private extension TodayViewController {
     @objc
     func shareButtonTapped() {
-        let item = "Location: \(String(describing: viewModel.currentWeather!.name))"
+        let item = "Location: \(String(describing: viewModel.currentWeather?.name))"
         let activityController = UIActivityViewController(activityItems: [item], applicationActivities: nil)
         activityController.popoverPresentationController?.sourceView = view
         present(activityController, animated: true)

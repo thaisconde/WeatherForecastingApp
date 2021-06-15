@@ -7,7 +7,7 @@ class GradientView: UIView {
     private let endColorBlue = UIColor(hex: "FFFFFF")?.withAlphaComponent(0.53).cgColor
     
     private let innerColorYellow = UIColor(hex: "#FCBA56")?.cgColor
-    private let middleColorYellow  = UIColor(hex: "#FCEC98")?.cgColor
+    private let middleColorYellow = UIColor(hex: "#FCEC98")?.cgColor
     private let endColorYellow = UIColor(hex: "#FFFFFF")?.cgColor
     
     private var colorToApply: [CGColor?] = []
@@ -34,8 +34,8 @@ class GradientView: UIView {
         gradientLayer.type = .axial
         gradientLayer.locations = location
         gradientLayer.frame = self.bounds
-        //gradientLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/45, 0, 0, 1)
-        //gradientLayer.cornerRadius = bounds.width / 2
+        // gradientLayer.transform = CATransform3DMakeRotation(-CGFloat.pi/45, 0, 0, 1)
+        // gradientLayer.cornerRadius = bounds.width / 2
         self.layer.insertSublayer(gradientLayer, at: 0)
     }
 }

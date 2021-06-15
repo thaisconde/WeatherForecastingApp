@@ -41,7 +41,7 @@ private extension TabBarController {
     
     func configNavigationBar() {
         let navigationBarAppearace = UINavigationBar.appearance()
-        navigationBarAppearace.setBackgroundImage(UIImage(), for:.default)
+        navigationBarAppearace.setBackgroundImage(UIImage(), for: .default)
         navigationBarAppearace.shadowImage = UIImage()
     }
     
@@ -62,12 +62,11 @@ private extension TabBarController {
     func createNavController(for rootViewController: UIViewController,
                              title: String,
                              image: UIImage) -> UIViewController {
-        
         let navController = UINavigationController(rootViewController: rootViewController)
         navController.tabBarItem.title = title
         navController.tabBarItem.image = image
-        //navController.navigationBar.prefersLargeTitles = true
-        //rootViewController.navigationItem.title = title
+        // navController.navigationBar.prefersLargeTitles = true
+        // rootViewController.navigationItem.title = title
         return navController
     }
 }

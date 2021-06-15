@@ -23,17 +23,21 @@ class TodayViewModel: TodayViewModelProtocol {
     weak var delegate: TodayViewModelDelegate?
     var currentWeather: CurrentWeatherResponse?
     var properties: [String] = []
-    private let property = ["Humidity",
-                            "Precipitation",
-                            "Pressure",
-                            "Wind",
-                            "Direction"]
+    private let property = [
+        "Humidity",
+        "Precipitation",
+        "Pressure",
+        "Wind",
+        "Direction"
+    ]
     
-    private let iconString = ["TodayHumidity-Light",
-                              "TodayPrecipitation-Light",
-                              "TodayPressure-Light",
-                              "TodayWindDirection-Light",
-                              "TodayWindSpeed-Light"]
+    private let iconString = [
+        "TodayHumidity-Light",
+        "TodayPrecipitation-Light",
+        "TodayPressure-Light",
+        "TodayWindDirection-Light",
+        "TodayWindSpeed-Light"
+    ]
     
     var arr: [[String: String]] = [[:]]
     
@@ -50,7 +54,6 @@ class TodayViewModel: TodayViewModelProtocol {
     func getCurrentWeather(at place: String) {
         status = .loading
         network.request(url: .currentWeather(place)) {[weak self] (result: APIResponse<CurrentWeatherResponse>) in
-
             self?.status = .stopLoading
             switch result {
             case let .failure(error):

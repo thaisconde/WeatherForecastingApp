@@ -1,7 +1,6 @@
 import UIKit
 
 class ForecastHeaderView: UITableViewHeaderFooterView {
-    
     override init(reuseIdentifier: String?) {
         super.init(reuseIdentifier: reuseIdentifier)
         commonInit()

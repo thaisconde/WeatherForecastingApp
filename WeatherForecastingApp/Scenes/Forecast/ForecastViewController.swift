@@ -27,26 +27,24 @@ class ForecastViewController: UIViewController {
         label.font = UIFont.style(.headline2)
         return label
     }()
-    
-    
+        
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
         tableView.delegate = self
         tableView.showsVerticalScrollIndicator = false
         tableView.separatorStyle = .none
-        //tableView.rowHeight = 120
+        // tableView.rowHeight = 120
         tableView.register(ForecastCell.self,
                            forCellReuseIdentifier: String(describing: ForecastCell.self))
         tableView.register(ForecastHeaderView.self,
                            forHeaderFooterViewReuseIdentifier: String(describing: ForecastHeaderView.self))
-        //tableView.backgroundView = activity
-        //tableView.tableHeaderView = UIView()
-        //tableView.tableFooterView = UIView()
+        // tableView.backgroundView = activity
+        // tableView.tableHeaderView = UIView()
+        // tableView.tableFooterView = UIView()
         return tableView
     }()
     
-   
     func configureView() {
         view.addSubview(titleLabel)
         view.addSubview(tableView)
@@ -66,11 +64,11 @@ class ForecastViewController: UIViewController {
 
 extension ForecastViewController: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
-        return viewModel.forecastByWeekday.count
+        viewModel.forecastByWeekday.count
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return viewModel.forecastByWeekday[section].groupData.count
+        viewModel.forecastByWeekday[section].groupData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -87,8 +85,7 @@ extension ForecastViewController: UITableViewDataSource {
 
 extension ForecastViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        
-        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView else {return UIView()}
+        guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView else { return UIView() }
         
         let data = viewModel.forecastByWeekday[section].weekday
         view.setupData(with: data)

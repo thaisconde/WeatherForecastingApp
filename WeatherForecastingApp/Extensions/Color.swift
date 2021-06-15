@@ -6,7 +6,7 @@ extension UIColor {
         let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
         
         if #available(iOS 13, *) {
-            //If your string is not a hex colour String then we are returning white color. you can change this to any default colour you want.
+            // If your string is not a hex colour String then we are returning white color. you can change this to any default colour you want.
             guard let int = Scanner(string: hex).scanInt32(representation: .hexadecimal)
                 else { return nil }
             
@@ -26,9 +26,7 @@ extension UIColor {
                       green: CGFloat(g) / 255.0,
                       blue: CGFloat(b) / 255.0,
                       alpha: CGFloat(a) / 255.0)
-            
         } else {
-            
             var int = UInt32()
             let a, r, g, b: UInt32
             

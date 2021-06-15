@@ -4,10 +4,10 @@ import SnapKit
 class CustomErrorView {
     private let imageName = "emoticon-sad"
     private var message: String?
-    private var firstAction: (()->())?
-    private var secondAction: (()->())?
+    private var firstAction: (() -> Void)?
+    private var secondAction: (() -> Void)?
     
-    init(message: String, firstAction: @escaping () -> Void , secondAction: @escaping () -> Void) {
+    init(message: String, firstAction: @escaping () -> Void, secondAction: @escaping () -> Void) {
         self.message = message
         self.firstAction = firstAction
         self.secondAction = secondAction
@@ -74,4 +74,3 @@ private extension CustomErrorView {
         guard firstAction != nil else { return }
     }
 }
-

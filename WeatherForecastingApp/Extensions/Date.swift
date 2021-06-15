@@ -2,7 +2,6 @@ import Foundation
 
 extension Date {
     func toString(withFormat format: String = "EEEE ، d MMMM yyyy") -> String {
-        
         let dateFormatter = DateFormatter()
         dateFormatter.locale = Locale(identifier: "fa-IR")
         dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")

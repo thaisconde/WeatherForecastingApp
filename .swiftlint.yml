@@ -108,7 +108,7 @@ custom_rules:
     message: "Don't include vertical whitespace (empty line) before closing braces."
     severity: warning
   overpowered_viewcontroller:
-    included: "PicPay\/Scenes\/.*ViewController.swift"
+    included: "WeatherForecastingApp\/Scenes\/.*ViewController.swift"
     name: 'Overpowered ViewController'
     regex: "(\\S+[mM]anager)"
     message: "A ViewController shouldn't known managers and other dependencies."

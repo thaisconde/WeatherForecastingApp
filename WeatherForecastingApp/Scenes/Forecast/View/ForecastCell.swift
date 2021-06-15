@@ -41,7 +41,6 @@ class ForecastCell: UITableViewCell {
     
     lazy var iconImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(systemName: "pencil.circle")
         return imageView
     }()
     

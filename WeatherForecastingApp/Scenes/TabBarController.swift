@@ -2,9 +2,7 @@ import UIKit
 
 class TabBarController: UITabBarController {
     private let firstTabName = "Today"
-    private let firstImageName = "TabBarToday-Light"
     private let secondTabName = "Forecast"
-    private let secondImageName = "TabBarForecast-Light"
     
     let firstViewController: TodayViewController
     let secondViewController: ForecastViewController
@@ -16,6 +14,7 @@ class TabBarController: UITabBarController {
         super.init(nibName: nil, bundle: nil)
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -46,16 +45,13 @@ private extension TabBarController {
     }
     
     func setupVCs() {
-        guard let fistImage = UIImage(named: firstImageName),
-              let secondImage = UIImage(named: secondImageName) else { return }
-        
         viewControllers = [
             createNavController(for: firstViewController,
                                 title: firstTabName,
-                                image: fistImage),
+                                image: Assets.TabBar.tabBarForecast.image),
             createNavController(for: secondViewController,
                                 title: secondTabName,
-                                image: secondImage)
+                                image: Assets.TabBar.tabBarToday.image)
         ]
     }
     

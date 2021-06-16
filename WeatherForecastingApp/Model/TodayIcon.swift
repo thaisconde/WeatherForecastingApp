@@ -1,3 +1,5 @@
+import UIKit
+
 enum Icon: String, Decodable {
     case clearSkyNight = "01n"
     case fewCloudsNight = "02n"
@@ -18,72 +20,58 @@ enum Icon: String, Decodable {
     case snowDay = "13d"
     case mistDay = "50d"
     
-    var forecastIcon: String {
-        let prefix = "Today"
-        // let sufixDark = "-Dark"
-        let sufixLight = "-Light"
-        var name: String
-        
+    var forecastIcon: UIImage {
         switch self {
         case .clearSkyDay:
-            name = "Sun"
+            return Assets.Forecast.todaySun.image
         case .clearSkyNight:
-            name = "Moon"
+            return Assets.Forecast.todayMoon.image
         case .fewCloudsDay:
-            name = "FewCloudsSun"
+            return Assets.Forecast.todayFewCloudsSun.image
         case .fewCloudsNight:
-            name = "FewCloudsMoon"
+            return Assets.Forecast.todayFewCloudsMoon.image
         case .scatteredCloudsDay, .scatteredCloudsNight:
-            name = "Cloudy"
+            return Assets.Forecast.todayCloudy.image
         case .brokenCloudsDay, .brokenCloudsNight:
-            name = "BrokenClouds"
+            return Assets.Forecast.todayBrokenClouds.image
         case .showerRainDay, .showerRainNight:
-            name = "Showers"
+            return Assets.Forecast.todayShowers.image
         case .rainDay, .rainNight:
-            name = "Rain"
+            return Assets.Forecast.todayRain.image
         case .thunderstormDay, .thunderstormNight:
-            name = "Thunderstorm"
+            return Assets.Forecast.todayThunderstorm.image
         case .snowDay, .snowNight:
-            name = "Snow"
+            return Assets.Forecast.todaySnow.image
         case .mistDay, .mistNight:
-            name = "Mist"
+            return Assets.Forecast.todayMist.image
         }
-        
-        return "\(prefix)\(name)\(sufixLight)"
     }
     
-    var todayIcon: String {
-        let prefix = "Forecast"
-        // let sufixDark = "-Dark"
-        let sufixLight = "-Light"
-        var name: String
-        
+    var todayIcon: UIImage {
         switch self {
         case .clearSkyDay:
-            name = "Sun"
+            return Assets.Properties.Temperature.forecastSun.image
         case .clearSkyNight:
-            name = "Moon"
+            return Assets.Properties.Temperature.forecastMoon.image
         case .fewCloudsDay:
-            name = "FewCloudsSun"
+            return Assets.Properties.Temperature.forecastFewCloudsSun.image
         case .fewCloudsNight:
-            name = "FewCloudsMoon"
+            return Assets.Properties.Temperature.forecastFewCloudsMoon.image
         case .scatteredCloudsDay, .scatteredCloudsNight:
-            name = "Cloudy"
+            return Assets.Properties.Temperature.forecastCloudy.image
         case .brokenCloudsDay, .brokenCloudsNight:
-            name = "BrokenClouds"
+            return Assets.Properties.Temperature.forecastBrokenClouds.image
         case .showerRainDay, .showerRainNight:
-            name = "Showers"
+            return Assets.Properties.Temperature.forecastShowers.image
         case .rainDay, .rainNight:
-            name = "Rain"
+            return Assets.Properties.Temperature.forecastRain.image
         case .thunderstormDay, .thunderstormNight:
-            name = "Thunderstorm"
+            return Assets.Properties.Temperature.forecastThunderstorm.image
         case .snowDay, .snowNight:
-            name = "Snow"
+            return Assets.Properties.Temperature.forecastSnow.image
         case .mistDay, .mistNight:
-            name = "Mist"
+            return Assets.Properties.Temperature.forecastMist.image
         }
-        
-        return "\(prefix)\(name)\(sufixLight)"
     }
     
     var title: String {

@@ -15,8 +15,6 @@ extension Double {
         // let double = rounded(self*100) / 100.0
         
         switch self {
-        case 31 * proportion..<proportion:
-            simbol = "N"
         case proportion..<3 * proportion:
             simbol = "NNE"
         case 3 * proportion..<5 * proportion:
@@ -47,6 +45,10 @@ extension Double {
             simbol = "NW"
         case 29 * proportion..<31 * proportion:
             simbol = "NNW"
+        case 31 * proportion..<360:
+            simbol = "N"
+        case 0..<proportion:
+            simbol = "N"
         default:
             simbol = ""
         }

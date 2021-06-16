@@ -10,7 +10,8 @@ class ForecastViewController: UIViewController {
         self.viewModel.delegate = self
     }
     
-     required init?(coder: NSCoder) {
+    @available(*, unavailable)
+    required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -27,7 +28,7 @@ class ForecastViewController: UIViewController {
         label.font = UIFont.style(.headline2)
         return label
     }()
-        
+    
     private lazy var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .plain)
         tableView.dataSource = self
@@ -74,7 +75,7 @@ extension ForecastViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: ForecastCell.self), for: indexPath) as? ForecastCell else {
             return UITableViewCell() }
-
+        
         let weatherList = viewModel.forecastByWeekday[indexPath.section].groupData[indexPath.row]
         
         cell.setupCell(weatherList: weatherList)

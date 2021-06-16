@@ -25,6 +25,7 @@ final class TodayViewController: UIViewController {
         self.viewModel.delegate = self
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -210,7 +211,7 @@ extension TodayViewController: TodayViewModelDelegate {
     
     func updateView() {
         guard let icon = viewModel.currentWeather?.weather.first?.icon else { return }
-        temperatureView.forecastImageView.image = UIImage(named: icon.todayIcon)
+        temperatureView.forecastImageView.image = icon.todayIcon
         temperatureView.temperatureLabel.text = viewModel.currentWeather?.main.temp?.stringCelsius
         temperatureView.locationLabel.text = viewModel.currentWeather?.name
         

@@ -10,12 +10,12 @@ extension PropertyCell.Layout {
 
 final class PropertyCell: UICollectionViewCell {
     private let property = ["Humidity", "Precipitation", "Pressure", "Wind", "Direction"]
-    private let iconString = [
-        "TodayHumidity-Light",
-        "TodayPrecipitation-Light",
-        "TodayPressure-Light",
-        "TodayWindDirection-Light",
-        "TodayWindSpeed-Light"
+    private let propertyIcon = [
+        Assets.Properties.todayHumidity.image,
+        Assets.Properties.todayPrecipitation.image,
+        Assets.Properties.todayPressure.image,
+        Assets.Properties.todayWindSpeed.image,
+        Assets.Properties.todayWindDirection.image
     ]
     
     fileprivate enum Layout {}
@@ -25,6 +25,7 @@ final class PropertyCell: UICollectionViewCell {
         commonInit()
     }
     
+    @available(*, unavailable)
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -112,7 +113,7 @@ final class PropertyCell: UICollectionViewCell {
 extension PropertyCell {
     func setupCell(currentWeather: CurrentWeatherResponse, indexPath: IndexPath) {
         guard indexPath.contains(indexPath.row) else { return }
-        iconImageView.image = UIImage(named: iconString[indexPath.row])
+        iconImageView.image = propertyIcon[indexPath.row]
         valueLabel.text = "56%"
         nameLabel.text = property[indexPath.row]
         
@@ -126,7 +127,7 @@ extension PropertyCell {
         case 3:
             valueLabel.text = currentWeather.wind.speed.msTokmh
         case 4:
-            valueLabel.text = String(currentWeather.wind.deg) // currentWeather.wind.deg.windSimbol
+            valueLabel.text = currentWeather.wind.deg.windSimbol
         default:
             break
         }

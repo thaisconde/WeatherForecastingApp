@@ -1,7 +1,6 @@
 import Foundation
 
 struct ForecastByWeekday {
-    let weekday: String
+    let data: Date
     let groupData: [List]
-//    let date: String
 }

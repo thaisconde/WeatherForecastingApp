@@ -10,6 +10,18 @@ extension Date {
         
         return str
     }
+    
+    var toSectionDescription: String {
+        let dateFormatterString = DateFormatter()
+        dateFormatterString.dateFormat = "EEEE, dd MMM"
+        return dateFormatterString.string(from: self)
+    }
+    
+    var toWeekday: String {
+        let dateFormatterString = DateFormatter()
+        dateFormatterString.dateFormat = "EEEE"
+        return dateFormatterString.string(from: self)
+    }
 }
 
 public extension Date {

@@ -119,14 +119,12 @@ class ForecastCell: UITableViewCell {
     }
 }
 extension ForecastCell {
-    func setupCell(weatherList: List) {
+    func setupCell(weatherList: List, isTimeNow: Bool) {
         guard let itemWeather = weatherList.weather.first else { return }
         iconImageView.image = itemWeather.icon.forecastIcon
         descriptionLabel.text = itemWeather.icon.title
         temperatureLabel.text = weatherList.main.temp?.stringCelsius
-        timeLabel.text = weatherList.date.toHour
-        
-        // let currentTime = Date().timeIntervalSinceReferenceDate
+        timeLabel.text = isTimeNow ? "Now" : weatherList.date.toHourString
     }
 }
 

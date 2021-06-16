@@ -1,15 +1,21 @@
 import Foundation
 
 extension TimeInterval {
-    //    var toDate: Date {
-    //        let date = Date(timeIntervalSince1970: self)
-    //        let components = Calendar.current.component(.weekday , from: date)
-    //        components.
-    //        return date
-    //    }
+    var toWeekdayId: Int {
+        let date = Date(timeIntervalSince1970: self)
+        let components = Calendar.current.component(.weekday, from: date)
+        return components
+    }
+    
+    var toDateString: String {
+        let date = Date(timeIntervalSince1970: self)
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        return dateFormatter.string(from: date)
+    }
     
     // 03:00 PM
-    var toHour: String {
+    var toHourString: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "HH:mm a"
@@ -17,7 +23,7 @@ extension TimeInterval {
     }
     
     // Tuesday
-    var toWeekday: String {
+    var toWeekdayString: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE"
@@ -25,7 +31,7 @@ extension TimeInterval {
     }
     
     // Tuesday, 08 Jun
-    var firstFormatter: String {
+    var firstFormatterString: String {
         let date = Date(timeIntervalSince1970: self)
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "EEEE, dd MMM"

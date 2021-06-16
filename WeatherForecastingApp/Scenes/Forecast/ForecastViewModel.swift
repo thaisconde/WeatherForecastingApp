@@ -1,3 +1,5 @@
+import Foundation
+
 protocol ForecastViewModelProtocol {
     func fetchForecast(place: String)
     var delegate: ForecastViewModelDelegate? { get set }
@@ -39,12 +41,14 @@ class ForecastViewModel: ForecastViewModelProtocol {
         }
     }
     
-    func splitDateByWeekday(with response: [List]) {
-        let splitDataInToDictionary = Dictionary(grouping: response, by: { $0.date.toWeekday })
+    private func splitDateByWeekday(with response: [List]) {
+        let splitDataInToDictionary = Dictionary(grouping: response, by: { $0.date.toDateString })
         
-        forecastByWeekday = splitDataInToDictionary.map({ key, value in
-            ForecastByWeekday(weekday: key, groupData: value)
-        })
+        forecastByWeekday = splitDataInToDictionary
+            .map({ key, value in
+                    ForecastByWeekday(data: key.toDate ?? Date(),
+                                      groupData: value)})
+            .sorted(by: { $0.data < $1.data })
     }
 }
 

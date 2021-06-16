@@ -5,13 +5,32 @@ extension String {
         NSLocalizedString(self, comment: "")
     }
     
-    func toDate(withFormat format: String = "yyyy-MM-dd HH:mm:ss") -> Date? {
+    var toDate: Date? {
         let dateFormatter = DateFormatter()
-        // dateFormatter.timeZone = TimeZone(identifier: "Asia/Tehran")
-        // dateFormatter.locale = Locale(identifier: "fa-IR")
-        dateFormatter.dateFormat = format
+        dateFormatter.dateFormat = "yyyy-MM-dd"
         let date = dateFormatter.date(from: self)
 
         return date
+    }
+    
+    var toWeekday: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: self) else { return String() }
+        
+        let weekDayId = Calendar.current.component(.weekday, from: date)
+        let weekDayDescription = Calendar.current.weekdaySymbols[weekDayId - 1]
+        
+        return weekDayDescription
+    }
+    
+    var toSectionDescription: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        guard let date = dateFormatter.date(from: self) else { return String() }
+        
+        let dateFormatterString = DateFormatter()
+        dateFormatterString.dateFormat = "EEEE, dd MMM"
+        return dateFormatterString.string(from: date)
     }
 }

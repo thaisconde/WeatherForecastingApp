@@ -77,8 +77,9 @@ extension ForecastViewController: UITableViewDataSource {
             return UITableViewCell() }
         
         let weatherList = viewModel.forecastByWeekday[indexPath.section].groupData[indexPath.row]
+        let isTimeNow = indexPath.section == 0 && indexPath.row == 0
         
-        cell.setupCell(weatherList: weatherList)
+        cell.setupCell(weatherList: weatherList, isTimeNow: isTimeNow)
         
         return cell
     }
@@ -88,8 +89,18 @@ extension ForecastViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         guard let view = tableView.dequeueReusableHeaderFooterView(withIdentifier: String(describing: ForecastHeaderView.self)) as? ForecastHeaderView else { return UIView() }
         
-        let data = viewModel.forecastByWeekday[section].weekday
-        view.setupData(with: data)
+        let forecastByWeekday = viewModel.forecastByWeekday[section]
+        var weekday: String
+        switch section {
+        case 0:
+            weekday = "Today"
+        case 1:
+            weekday = "Tomorrow"
+        default:
+            weekday = forecastByWeekday.data.toWeekday
+        }
+        
+        view.setupData(weekday: weekday, sectionData: forecastByWeekday.data.toSectionDescription)
         
         return view
     }

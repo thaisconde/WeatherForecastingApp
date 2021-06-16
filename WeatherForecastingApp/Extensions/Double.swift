@@ -12,7 +12,6 @@ extension Double {
     var windSimbol: String {
         var simbol: String
         let proportion: Double = 11.25
-        // let double = rounded(self*100) / 100.0
         
         switch self {
         case proportion..<3 * proportion:
@@ -50,7 +49,7 @@ extension Double {
         case 0..<proportion:
             simbol = "N"
         default:
-            simbol = ""
+            simbol = String()
         }
         return simbol
         // ref: https://meteoropole.com.br/2014/01/vento-conversao-da-direcao/

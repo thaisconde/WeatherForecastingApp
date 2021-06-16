@@ -51,8 +51,8 @@ class ForecastHeaderView: UITableViewHeaderFooterView {
         }
     }
     
-    func setupData(with list: String) {
-        dayLabel.text = list
-       // dateLabel.text = list.date.firstFormatter
+    func setupData(weekday: String, sectionData: String) {
+        dayLabel.text = weekday
+        dateLabel.text = sectionData
     }
 }
